@@ -1,0 +1,145 @@
+{
+    "wheat": {
+        "info": {
+            "temperature": "15-25\u00b0C",
+            "soil_moisture": "Moderate",
+            "humidity": "60-80%",
+            "irrigation_tips": [
+                "Water early in the morning.",
+                "Avoid over-irrigation.",
+                "Provide about 20-25 inches of water throughout the growing season."
+            ]
+        },
+        "request_count": 15,
+        "timestamp": 1743921853.4848557
+    },
+    "rice": {
+        "info": {
+            "temperature": "20-30\u00b0C",
+            "soil_moisture": "High",
+            "humidity": "70-90%",
+            "irrigation_tips": [
+                "Flooding the field is recommended.",
+                "Water depth should be around 5-10 cm."
+            ]
+        },
+        "request_count": 9,
+        "timestamp": 1743923484.123288
+    },
+    "chicken nuggets": {
+        "info": {
+            "temperature": "N/A",
+            "soil_moisture": "N/A",
+            "humidity": "N/A",
+            "irrigation_tips": [
+                "Chicken nuggets are not a crop and do not require irrigation."
+            ]
+        },
+        "request_count": 1,
+        "timestamp": 1743920846.447686
+    },
+    "erythroxylem coca": {
+        "info": {
+            "temperature": "18-28\u00b0C",
+            "soil_moisture": "High",
+            "humidity": "70-90%",
+            "irrigation_tips": [
+                "Water regularly, but allow soil to dry slightly between waterings.",
+                "Mulch around the base to retain moisture."
+            ]
+        },
+        "request_count": 1,
+        "timestamp": 1744123626.5923429
+    },
+    "acacia tree": {
+        "info": {
+            "temperature": "15-30\u00b0C",
+            "soil_moisture": "Moderate",
+            "humidity": "40-60%",
+            "irrigation_tips": [
+                "Water deeply once or twice a week.",
+                "Reduce irrigation during winter months."
+            ]
+        },
+        "request_count": 1,
+        "timestamp": 1744204895.0873432
+    },
+    "aman jayesh tree": {
+        "info": {
+            "temperature": "20-30\u00b0C",
+            "soil_moisture": "High",
+            "humidity": "70-90%",
+            "irrigation_tips": [
+                "Water thoroughly once a week.",
+                "Mulch around the base to retain moisture."
+            ]
+        },
+        "request_count": 1,
+        "timestamp": 1744204935.230817
+    },
+    "green gram": {
+        "info": {
+            "temperature": "20-30\u00b0C",
+            "soil_moisture": "Moderate",
+            "humidity": "60-80%",
+            "irrigation_tips": [
+                "Water when the top 5-7 cm of soil feels dry to the touch.",
+                "Avoid waterlogging, as it can lead to root rot."
+            ]
+        },
+        "request_count": 1,
+        "timestamp": 1744228734.026688
+    },
+    "paddy": {
+        "info": {
+            "temperature": "20-35\u00b0C",
+            "soil_moisture": "High",
+            "humidity": "70-90%",
+            "irrigation_tips": [
+                "Flooding the field for 1-2 weeks after transplanting.",
+                "Drain the field 1-2 weeks before harvesting."
+            ]
+        },
+        "request_count": 1,
+        "timestamp": 1744260362.2481344
+    },
+    "tomato": {
+        "info": {
+            "temperature": "18-28\u00b0C",
+            "soil_moisture": "Moderate",
+            "humidity": "50-70%",
+            "irrigation_tips": [
+                "Water deeply and infrequently to encourage deep root growth.",
+                "Mulch around the plants to reduce evaporation and retain moisture."
+            ]
+        },
+        "request_count": 1,
+        "timestamp": 1744284046.764096
+    },
+    "cactus": {
+        "info": {
+            "temperature": "15-30\u00b0C",
+            "soil_moisture": "Low",
+            "humidity": "40-60%",
+            "irrigation_tips": [
+                "Water sparingly, allowing soil to dry out completely between waterings.",
+                "Water during the cooler part of the day to minimize evaporation."
+            ]
+        },
+        "request_count": 3,
+        "timestamp": 1744536115.2530954
+    },
+    "ixora": {
+        "info": {
+            "temperature": "18-28\u00b0C",
+            "soil_moisture": "Moderate",
+            "humidity": "50-70%",
+            "irrigation_tips": [
+                "Water thoroughly once or twice a week.",
+                "Check the soil moisture by inserting a finger into the soil up to the knuckle."
+            ]
+        },
+        "request_count": 1,
+        "timestamp": 1744895947.0505278
+    }
+}

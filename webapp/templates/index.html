@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Smart Irrigation Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            margin: 20px;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .chart-container {
+            margin: 20px auto;
+            max-width: 800px;
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <button id="darkModeToggle" onclick="toggleDarkMode()" class="dark-mode-btn">
+        🌙
+    </button>
+    <h1>Smart Irrigation Dashboard</h1>
+    <div class="status-box">
+      <h2>System Status</h2>
+
+      <div class="status-section">
+        <h3>Local ESP32</h3>
+        <p>Status: <span id="local-esp32-status" class="status">Loading...</span></p>
+      </div>
+
+      <div class="status-section">
+        <h3>Remote ESP32</h3>
+        <p>Status: <span id="remote-esp32-status" class="status">Loading...</span></p>
+
+        <div class="sensor-status">
+          <p>Temperature Sensor: <span id="temperature-status" class="status">Loading...</span></p>
+          <p>Humidity Sensor: <span id="humidity-status" class="status">Loading...</span></p>
+          <p>Moisture Sensor: <span id="moisture-status" class="status">Loading...</span></p>
+        </div>
+      </div>
+    </div>    
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4">
+                <h5>Soil Moisture</h5>
+                <div class="chart-container">
+                    <canvas id="soilMoistureChart"></canvas>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h5>Temperature</h5>
+                <div class="chart-container">
+                    <canvas id="temperatureChart"></canvas>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h5>Humidity</h5>
+                <div class="chart-container">
+                    <canvas id="humidityChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-3">
+          <button onclick="downloadCSV()" class="btn btn-primary">Download CSV of data</button>
+        </div>    
+    </div>
+    <!-- Manual Irrigation Controls -->
+    <div class="container mt-5">
+        <h3 class="text-center">Manual Irrigation Controls</h3>
+        <div class="row justify-content-center">
+            <div class="col-md-6 chart-card">
+                <div class="form-group">
+                    <label for="pumpStatus">Pump Status:</label>
+                    <span id="pumpStatus" class="badge badge-secondary">OFF</span>
+                </div>
+                <div class="form-group">
+                    <label for="duration">Set Timer (minutes):</label>
+                    <input type="number" id="duration" class="form-control" min="1" max="60" placeholder="Optional">
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-success" onclick="controlPump('on')">Turn On</button>
+                    <button class="btn btn-danger" onclick="controlPump('off')">Turn Off</button>
+                </div>
+                <div id="countdown" class="text-center mt-3"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Crop Selection Section -->
+    <div class="container mt-5">
+        <h3 class="text-center">Crop Selection</h3>
+        <div class="row justify-content-center">
+            <div class="col-md-6 chart-card">
+                <div class="form-group">
+                    <label for="cropName">Select Crop:</label>
+                    <input type="text" id="cropName" class="form-control" placeholder="Enter crop name (e.g., Wheat)">
+                </div>
+                <button class="btn btn-primary btn-block" onclick="fetchCropInfo()">Get Crop Info</button>
+                <div id="cropInfo" class="mt-4"></div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/script.js"></script>
+    <div id="toast" class="toast hidden">Reset to default thresholds</div>
+</body>
+</html>
