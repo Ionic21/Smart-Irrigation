@@ -1,4 +1,3 @@
-
 // HOME_WIFI.ino
 #include <WiFi.h>
 #include <HTTPClient.h>
@@ -11,19 +10,22 @@ const char* ssid = "AmanS23";
 const char* password = "nopassword123";
 
 // Server URLs
-const char* getUrl = "http://192.168.48.6:5000/thresh_info";
-const char* postUrl = "http://192.168.48.6:5000/sensor-data";
+const char* getUrl = "http://192.168.6.6:5000/thresh_info";
+const char* postUrl = "http://192.168.6.6:5000/sensor-data";
 
 // Variables
-float latestThreshold = 0;
+float latestThreshold = 50;
 bool manualPumpActive = false;
+
+// ✅ Track whether threshold has ever been received
+bool hasReceivedThreshold = false;
 
 float temp = 0.0, hum = 0.0;
 int soil = 0;
 bool receivedSensorData = false;
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(115200);jjgasdhj
   mySerial.begin(115200, SERIAL_8N1, 16, 17); // UART2 (TX2=17, RX2=16)
 
   WiFi.begin(ssid, password);
@@ -36,10 +38,15 @@ void setup() {
 }
 
 void loop() {
-  fetchThreshInfo();
+  // Step 1: Try to update threshold
+  bool gotNewThreshold = fetchThreshInfo();
+
+  // ✅ Fallback: use last threshold or default
+  float thresholdToSend = hasReceivedThreshold ? latestThreshold : 50;
+  bool manualToSend = hasReceivedThreshold ? manualPumpActive : false;
 
   // Step 2: Send threshold to LoRa ESP via UART
-  String msg = String(manualPumpActive) + ":" + String(latestThreshold);
+  String msg = String(manualToSend) + ":" + String(thresholdToSend);
   mySerial.println(msg);
   Serial.print("Sent to LoRa ESP: ");
   Serial.println(msg);
@@ -70,7 +77,7 @@ void loop() {
 }
 
 // Fetch threshold from server
-void fetchThreshInfo() {
+bool fetchThreshInfo() {
   if (WiFi.status() == WL_CONNECTED) {
     HTTPClient http;
     http.begin(getUrl);
@@ -87,10 +94,13 @@ void fetchThreshInfo() {
       if (!error) {
         latestThreshold = doc["target_moisture"];
         manualPumpActive = doc["manual_pump_active"];
+        hasReceivedThreshold = true; // ✅ Mark as received
         Serial.print("Target Moisture: ");
         Serial.println(latestThreshold);
         Serial.print("Manual Pump: ");
         Serial.println(manualPumpActive ? "Yes" : "No");
+        http.end();
+        return true;
       } else {
         Serial.println("❌ JSON parse failed");
       }
@@ -103,6 +113,7 @@ void fetchThreshInfo() {
   } else {
     Serial.println("⚠ WiFi not connected");
   }
+  return false;
 }
 
 // Parse sensor data from field
@@ -134,7 +145,6 @@ bool parseSensorData(String incoming) {
 
   return true;
 }
-
 
 // Send data to server
 void sendSensorData() {
